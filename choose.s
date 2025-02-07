@@ -6,17 +6,6 @@
 
         .text
         .thumb_func
-integerdiv:
-        movs r2, #0 @initialise the quotient to 0. we keep the remainder in r0
-        	loop1:
-        cmp r0, r1 	@if r < y ...
-        blo end		@  break out of loop
-        adds r2, #1	@q = q + 1
-        subs r0, r1	@r = r - y
-        b loop1		@back to start of loop
-        	end:
-        movs r0, r2	@return the quotient
-        bx lr
 func:
 @ ----------------
 @ Two parameters are in registers r0 and r1
@@ -38,4 +27,15 @@ func:
 	movs r1, r3
 	bl integerdiv
 	bx lr
+integerdiv:
+        movs r2, #0 @initialise the quotient to 0. we keep the remainder in r0
+        	loop1:
+        cmp r0, r1 	@if r < y ...
+        blo end		@  break out of loop
+        adds r2, #1	@q = q + 1
+        subs r0, r1	@r = r - y
+        b loop1		@back to start of loop
+        	end:
+        movs r0, r2	@return the quotient
+        bx lr
 
